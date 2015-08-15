@@ -6,6 +6,7 @@ Finds the middle line of a road, and its junctions, in a stereo image. Tested wi
 A Convolutional Neural Network, [CN24](https://github.com/cvjena/cn24), is used for road detection. Subsequently, a birds-eye view is calculated using OpenCV's findHomography and warpPerspective. Line segments are obtained by thinning the detected road, simplifying with a voxel grid filter, and calculating a minimum spanning tree of the resulting points.
 
 Requires:
+- [CN24](https://github.com/cvjena/cn24) - the environment variable 'CN24PATH' has to be set to the path to the cn24 build directory (e.g. 'export CN24PATH=/home/USER/cn24/build')
 - numpy, scipy, matplotlib 
 - skimage
 - cv2

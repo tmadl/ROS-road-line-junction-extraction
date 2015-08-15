@@ -21,6 +21,8 @@ IMGLOAD_RETRIES = 10 # how often to re-try loading the image and point clouds (t
 BORDERCUTOFF = 10 # (in px) ignore noisy border in road detection
 ROAD_CLOSEKERNELSIZE = 18 # (in px) kernel size of OpenCV close operation when closing holes and artifacts in recognized role
 
+MINARCLEN=20 # (in px) arcs of the thinned road below this length are discarded as noise
+
 # exclude some parts of birds-eye view projection (to remove parts of the image that are black [impossible to compute from first-person perspective] or likely to be erroneous)
 BIRDSEYE_EXCLUDED_AREAS = [
     [600, 800, 450, 800], # (in px) black triangle in lower right corner of birds-eye projection arising from limited perspective
@@ -29,8 +31,3 @@ BIRDSEYE_EXCLUDED_AREAS = [
 ]
 BIRDSEYEZOOM = 0.5 # controls how much will be included in the birds-eye image (roughly the "height" of a birds-eye camera)
 
-MINARCLEN=20 # (in px) arcs of the thinned road below this length are discarded as noise
-
-# these parameters control how much deviation we accept for a linear model (if more than this, use a more complex model)
-STRAIGHTROAD_MAXERROR = 100 # (in px)
-STRAIGHTROAD_MAXOUTLIERS = 10 # number of outliers with more than MAXERROR
