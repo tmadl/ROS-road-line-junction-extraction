@@ -136,7 +136,7 @@ def getroadlinesegments(camimg, warpedimg, H, accurate_intersections=False):
         points = []
         if cv2.arcLength(c, False) > MINARCLEN:
             cpts = numpy.array(cv2.approxPolyDP(c, epsilon, False)[:, 0, :])
-            d = numpy.sum(numpy.square(cpts-numpy.array([800, 0])), axis=1)
+            d = numpy.sum(numpy.square(cpts-numpy.array([ISIZE, 0])), axis=1)
             cpts = cpts[numpy.argsort(d), :]
             coords.append(cpts)
             trees.append(scipy.spatial.cKDTree(cpts))
@@ -188,9 +188,9 @@ def getroadlinesegments(camimg, warpedimg, H, accurate_intersections=False):
         
     # add midpoint
     midpoint = getmidpoint(camimg)
-    wmidpoint = homographyProjection(midpoint, 800, H[0])
-    points = numpy.vstack((points, [wmidpoint[0], 800]))
-    #d = numpy.sum(numpy.square(points-numpy.array([wmidpoint[0], 800])), axis=1)
+    wmidpoint = homographyProjection(midpoint, ISIZE, H[0])
+    points = numpy.vstack((points, [wmidpoint[0], ISIZE]))
+    #d = numpy.sum(numpy.square(points-numpy.array([wmidpoint[0], ISIZE])), axis=1)
     #points = points[numpy.argsort(d), :]
     # correctly connect - minimum spanning tree excluding non-road edges
     D = squareform(pdist(points))
@@ -218,7 +218,7 @@ def getroadlinesegments(camimg, warpedimg, H, accurate_intersections=False):
     icounts = numpy.array([0]*len(points))
     icounts += numpy.bincount(edge_list[:, 0], minlength=len(points))
     icounts += numpy.bincount(edge_list[:, 1], minlength=len(points))
-    midpointidx = numpy.where(points[:, 1]==800)[0]
+    midpointidx = numpy.where(points[:, 1]==ISIZE)[0]
     if midpointidx: icounts[midpointidx]+=1
     junctionpointidx = numpy.where(icounts>2)[0]
     # remove junctions with too sharp angles
