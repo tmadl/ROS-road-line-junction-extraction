@@ -16,13 +16,14 @@ Examples
 ===============
 
 Detected road in first-person camera image (left), obtained by a simulated robot, and the same image warped to bird's eye perspective (right)
+![Example 1](example_results/results_environment_1.png)
+
+Actual environment
+![Example 1](example_results/actual_environment_1.png)
+
+Detected road in first-person camera image (left), obtained by a simulated robot, and the same image warped to bird's eye perspective (right)
 ![Example 1](example_results/results_environment_2.png)
 
 Actual environment
 ![Example 1](example_results/actual_environment_2.png)
 
-Detected road in first-person camera image (left), obtained by a simulated robot, and the same image warped to bird's eye perspective (right)
-![Example 1](example_results/results_environment_1.png)
-
-Actual environment
-![Example 1](example_results/actual_environment_1.png)
