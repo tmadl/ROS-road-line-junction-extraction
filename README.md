@@ -23,18 +23,24 @@ import matplotlib
 import matplotlib.pyplot as plt
 from roadlinesegments import *
 
-# load images
+## uncomment to obtain images from ROS topic
+#from savesensordata_node import *
+#import time
+#savesensordata()
+#time.sleep(2)
+
+## load images
 camimg = getcameraimg()
 roadimg = getroadimg()
 depthmap, points, notnanindices = getdepthimg()
 
-# get birds-eye view
+## get birds-eye view
 warpedimg, H = getbirdseyeview(camimg, roadimg, depthmap, points, notnanindices)
 
-# run road detection   
+## run road detection   
 points, edge_list, junctionpointidx, allpoints = getroadlinesegments(camimg, warpedimg, H)
 
-# plot results
+## plot results
 plt.subplot(1,2,1)
 camimg[roadimg!=0] += [0,100,0] # paint road green for visualization
 plt.imshow(camimg)
@@ -48,6 +54,11 @@ for i in junctionpointidx:
     plt.scatter(points[i, 0], points[i, 1], c='red', s=300)
 plt.title('Birds-eye warped image, road skeleton and junctions')
 plt.show()
+```
+
+To obtain 
+
+```bash
 ```
 
 Examples

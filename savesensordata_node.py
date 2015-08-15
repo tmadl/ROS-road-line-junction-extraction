@@ -45,10 +45,11 @@ def savesensordata():
 	threads.append(p)
 
 def exitsignal(signal=None, frame=None):
+    running = False
     del threads[:]
 
 if __name__ == "__main__":
     rospy.init_node('savesensordata_node')
-    print('Storing robot sensor data. Press Ctrl+Z to exit.')
+    print('Storing robot sensor data. Press Ctrl+C to exit.')
     signal.signal(signal.SIGINT, exitsignal)
     savesensordata()
