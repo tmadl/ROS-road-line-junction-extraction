@@ -214,6 +214,11 @@ def getroadlinesegments(camimg, warpedimg, H, accurate_intersections=False):
     # obtain MST without crossing road pixels - good approximation of road center
     edge_list = minimum_spanning_tree(D)
     edge_list = numpy.sort(edge_list, axis=1)
+    keep = []
+    for i in range(len(edge_list)):
+        if D[edge_list[i][0], edge_list[i][1]] < ADD:
+            keep.append(i) # only keep if edge not outside of road
+    edge_list = edge_list[keep, :]
     # find junctions
     icounts = numpy.array([0]*len(points))
     icounts += numpy.bincount(edge_list[:, 0], minlength=len(points))
