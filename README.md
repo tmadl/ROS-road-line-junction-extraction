@@ -56,11 +56,6 @@ plt.title('Birds-eye warped image, road skeleton and junctions')
 plt.show()
 ```
 
-To obtain 
-
-```bash
-```
-
 Examples
 ===============
 

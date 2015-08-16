@@ -8,7 +8,7 @@ ANGLETOLERANCE = 0.5 # (in rad) sharpest angle allowed to be a junction
 
 # Image size
 try:
-    ISIZE = int(os.environ['CN24PATH'])
+    ISIZE = int(os.environ['IMAGESIZE'])
 except:
     ISIZE = 800
 
