@@ -196,7 +196,6 @@ def getroadlinesegments(camimg, warpedimg, H, accurate_intersections=False):
     D = squareform(pdist(points))
     
     # set distances crossing non-road pixels to high value (we want to avoid connecting these)
-    ADD = 1e6
     pxcheckinterval = 20
     for i in range(len(points)):
         for j in range(i+1, len(points)):
@@ -208,15 +207,15 @@ def getroadlinesegments(camimg, warpedimg, H, accurate_intersections=False):
                 pass
             for lpx in linepx:
                 if wroadimg[lpx[1], lpx[0]] == 0: # connecting line lies outside of road - make it unlikely to connect
-                    D[i,j] += ADD
-                    D[j,i] += ADD
+                    D[i,j] = numpy.inf
+                    D[j,i] = numpy.inf
 
     # obtain MST without crossing road pixels - good approximation of road center
     edge_list = minimum_spanning_tree(D)
     edge_list = numpy.sort(edge_list, axis=1)
     keep = []
     for i in range(len(edge_list)):
-        if D[edge_list[i][0], edge_list[i][1]] < ADD:
+        if not numpy.isinf(D[edge_list[i][0], edge_list[i][1]]):
             keep.append(i) # only keep if edge not outside of road
     edge_list = edge_list[keep, :]
     # find junctions
